@@ -14,9 +14,15 @@ class HotelViewController: UIViewController {
     var hotelData = hotelInfo()
     
     @IBOutlet var hotelNameLabel: UILabel!
+    @IBOutlet var addressLabel: UILabel!
+    @IBOutlet var priceLabel: UILabel!
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         hotelNameLabel.text = hotelData.name
+        print(hotelData.imageURL)
+        addressLabel.text = hotelData.address
+        priceLabel.text = hotelData.price
+        
     }
 }

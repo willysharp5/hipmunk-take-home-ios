@@ -86,7 +86,7 @@ class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigati
                 completionHandler: nil)
         case "HOTEL_API_HOTEL_SELECTED":
             
-            //Extract Dats
+            //Extract Datas
             let json = message.body as! NSDictionary
             let dic = json
             //print(dic)
