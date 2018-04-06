@@ -10,20 +10,7 @@ import Foundation
 import WebKit
 import UIKit
 
-
-private let dateFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateFormat = "YYYY-mm-dd"
-    return formatter
-}()
-
-private func jsonStringify(_ obj: [AnyHashable: Any]) -> String {
-    let data = try! JSONSerialization.data(withJSONObject: obj, options: [])
-    return String(data: data, encoding: .utf8)!
-}
-
-
-class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigationDelegate {
+class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigationDelegate, SortHotelViewControllerDelegate {
 
     struct Search {
         let location: String
@@ -31,17 +18,18 @@ class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigati
         let dateEnd: Date
 
         var asJSONString: String {
-            return jsonStringify([
+            return Utils.jsonStringify([
                 "location": location,
-                "dateStart": dateFormatter.string(from: dateStart),
-                "dateEnd": dateFormatter.string(from: dateEnd)
+                "dateStart": Utils.dateFormatter.string(from: dateStart),
+                "dateEnd": Utils.dateFormatter.string(from: dateEnd)
             ])
         }
     }
     
+    var sortOptionData = ""
     var hotelData = hotelInfo()
-
     private var _searchToRun: Search?
+    
 
     lazy var webView: WKWebView = {
         let webView = WKWebView(frame: CGRect.zero, configuration: {
@@ -66,6 +54,13 @@ class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigati
         self.view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[webView]|", options: [], metrics: nil, views: ["webView": webView]))
         return webView
     }()
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        webView.reload()
+    }
+    
 
     func search(location: String, dateStart: Date, dateEnd: Date) {
         _searchToRun = Search(location: location, dateStart: dateStart, dateEnd: dateEnd)
@@ -82,9 +77,18 @@ class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigati
         switch message.name {
         case "API_READY":
             guard let searchToRun = _searchToRun else { fatalError("Tried to load the page without having a search to run") }
-           self.webView.evaluateJavaScript(
+           
+            self.webView.evaluateJavaScript(
                 "window.JSAPI.runHotelSearch(\(searchToRun.asJSONString))",
                 completionHandler: nil)
+            
+            //run sort
+            if sortOptionData != "" {
+                sortOptionData = "\u{22}\(sortOptionData)\u{22}" //add quotes
+                //print("window.JSAPI.setHotelSort(\(sortOptionData))")
+                self.webView.evaluateJavaScript("window.JSAPI.setHotelSort(\(sortOptionData))", completionHandler: nil)
+            }
+            
             
         case "HOTEL_API_RESULTS_READY":
             //Update Title to show count
@@ -102,6 +106,13 @@ class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigati
         default: break
         }
     }
+    
+    
+    
+    // MARK: - Sort
+    func sortOption(sortOption: String) {
+        sortOptionData = sortOption
+    }
 
 }
 
@@ -116,5 +127,12 @@ extension SearchViewController {
             let destination = segue.destination as? HotelViewController
             destination?.hotelData = hotelData
         }
+        
+        if segue.identifier == "select_sort" {
+            let navVC = segue.destination as? UINavigationController
+            let sortPickerVC = navVC?.topViewController as? SortHotelViewController
+            sortPickerVC?.delegate = self
+        }
+        
     }
 }

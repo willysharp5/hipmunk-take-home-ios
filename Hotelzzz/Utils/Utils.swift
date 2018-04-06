@@ -50,4 +50,15 @@ struct Utils {
         
         return hotelData
     }
+    
+    static func jsonStringify(_ obj: [AnyHashable: Any]) -> String {
+        let data = try! JSONSerialization.data(withJSONObject: obj, options: [])
+        return String(data: data, encoding: .utf8)!
+    }
+    
+    static let dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "YYYY-mm-dd"
+        return formatter
+    }()
 }
