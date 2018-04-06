@@ -11,11 +11,12 @@ import UIKit
 
 
 class HotelViewController: UIViewController {
-    var hotelName: String = ""
+    var hotelData = hotelInfo()
+    
     @IBOutlet var hotelNameLabel: UILabel!
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        hotelNameLabel.text = hotelName
+        hotelNameLabel.text = hotelData.name
     }
 }

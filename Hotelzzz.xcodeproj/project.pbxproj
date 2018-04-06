@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8ADA74DC20774D0A006A3157 /* HotelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADA74DB20774D0A006A3157 /* HotelData.swift */; };
+		8ADA74DF20774D8E006A3157 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ADA74DE20774D8E006A3157 /* Utils.swift */; };
 		F222BCD61E81E72500CE0EB2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222BCD51E81E72500CE0EB2 /* AppDelegate.swift */; };
 		F222BCD81E81E72500CE0EB2 /* SearchFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F222BCD71E81E72500CE0EB2 /* SearchFormViewController.swift */; };
 		F222BCDB1E81E72500CE0EB2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F222BCD91E81E72500CE0EB2 /* Main.storyboard */; };
@@ -30,6 +32,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		8ADA74DB20774D0A006A3157 /* HotelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotelData.swift; sourceTree = "<group>"; };
+		8ADA74DE20774D8E006A3157 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		F222BCD21E81E72500CE0EB2 /* Hotelzzz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Hotelzzz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F222BCD51E81E72500CE0EB2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F222BCD71E81E72500CE0EB2 /* SearchFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFormViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +68,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8ADA74DA20774CDF006A3157 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8ADA74DB20774D0A006A3157 /* HotelData.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8ADA74DD20774D6C006A3157 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				8ADA74DE20774D8E006A3157 /* Utils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		F222BCC91E81E72400CE0EB2 = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +105,8 @@
 		F222BCD41E81E72500CE0EB2 /* Hotelzzz */ = {
 			isa = PBXGroup;
 			children = (
+				8ADA74DD20774D6C006A3157 /* Utils */,
+				8ADA74DA20774CDF006A3157 /* Model */,
 				F222BCD51E81E72500CE0EB2 /* AppDelegate.swift */,
 				F222BCD71E81E72500CE0EB2 /* SearchFormViewController.swift */,
 				F222BCF51E830D4C00CE0EB2 /* DatePickerViewController.swift */,
@@ -216,9 +238,11 @@
 				F222BCD81E81E72500CE0EB2 /* SearchFormViewController.swift in Sources */,
 				F222BCD61E81E72500CE0EB2 /* AppDelegate.swift in Sources */,
 				F222BCF81E83175000CE0EB2 /* SearchViewController.swift in Sources */,
+				8ADA74DC20774D0A006A3157 /* HotelData.swift in Sources */,
 				F222BCF61E830D4C00CE0EB2 /* DatePickerViewController.swift in Sources */,
 				F27251351E95A60E00222BC8 /* UIViewController+Extensions.swift in Sources */,
 				F222BCFA1E83235F00CE0EB2 /* HotelViewController.swift in Sources */,
+				8ADA74DF20774D8E006A3157 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -38,6 +38,8 @@ class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigati
             ])
         }
     }
+    
+    var hotelData = hotelInfo()
 
     private var _searchToRun: Search?
 
@@ -83,8 +85,31 @@ class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigati
                 "window.JSAPI.runHotelSearch(\(searchToRun.asJSONString))",
                 completionHandler: nil)
         case "HOTEL_API_HOTEL_SELECTED":
+            
+            //Extract Dats
+            let json = message.body as! NSDictionary
+            let dic = json
+            //print(dic)
+            
+            hotelData = Utils.cleanUpData(dic: dic)
+            
             self.performSegue(withIdentifier: "hotel_details", sender: nil)
         default: break
+        }
+    }
+
+}
+
+
+// MARK: - Navigation
+extension SearchViewController {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        if segue.identifier == "hotel_details" {
+            let destination = segue.destination as? HotelViewController
+            destination?.hotelData = hotelData
         }
     }
 }
