@@ -8,28 +8,38 @@
 
 import UIKit
 
+protocol FilterHotelViewControllerDelegate: class {
+    func filterOption(priceMax: String, priceMin: String, setFilter: Bool)
+}
+
+
 class FilterHotelViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    weak var delegate: FilterHotelViewControllerDelegate?
+    
+    @IBOutlet weak var startRange: UITextField!
+    @IBOutlet weak var endRange: UITextField!
+    
+    var priceMax = "200"
+    var priceMin = "100"
+    var setFilter = false
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        startRange.text = priceMax
+        endRange.text = priceMin
     }
     
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func doneDidTouch(_ sender: Any) {
+        priceMax = startRange.text!
+        priceMin = endRange.text!
+        setFilter = true
+        self.delegate?.filterOption(priceMax: priceMax, priceMin: priceMin, setFilter: setFilter)
+        self.dismiss(animated: true, completion: nil)
     }
-    */
-
+    
 }
+
+

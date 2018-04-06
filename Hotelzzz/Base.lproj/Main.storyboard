@@ -135,10 +135,6 @@
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C6v-xY-Naf">
                                 <rect key="frame" x="0.0" y="64" width="375" height="216"/>
-                                <connections>
-                                    <outlet property="dataSource" destination="FPC-mT-DqL" id="vvM-ZU-JBM"/>
-                                    <outlet property="delegate" destination="FPC-mT-DqL" id="dbl-uV-Sby"/>
-                                </connections>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MXh-OL-bM2">
                                 <rect key="frame" x="169" y="288" width="37" height="30"/>
@@ -175,7 +171,7 @@
         <!--Select hotel filters-->
         <scene sceneID="bkW-2h-LaA">
             <objects>
-                <viewController id="cIZ-1D-rMf" sceneMemberID="viewController">
+                <viewController id="cIZ-1D-rMf" customClass="FilterHotelViewController" customModule="Hotelzzz" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kd1-wR-CGV"/>
                         <viewControllerLayoutGuide type="bottom" id="mcT-pb-YxW"/>
@@ -183,7 +179,68 @@
                     <view key="view" contentMode="scaleToFill" id="q2P-9E-9Jp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sAt-tL-5dn">
+                                <rect key="frame" x="169" y="200" width="37" height="30"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="doneDidTouch:" destination="cIZ-1D-rMf" eventType="touchUpInside" id="FkX-y7-XxF"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="avb-yK-Sus">
+                                <rect key="frame" x="70" y="145" width="97" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="5tw-ix-jzF"/>
+                                    <constraint firstAttribute="width" constant="97" id="Xi0-t1-Ya0"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CQO-Bq-xlZ">
+                                <rect key="frame" x="232" y="145" width="97" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="97" id="8JS-B3-9es"/>
+                                    <constraint firstAttribute="height" constant="30" id="q7x-uw-2HV"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price Max" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="63B-XQ-4Zo">
+                                <rect key="frame" x="80" y="116" width="76" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="76" id="2PR-6P-Rrf"/>
+                                    <constraint firstAttribute="height" constant="21" id="KR4-GR-sk0"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Price Min" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lkh-NW-MqK">
+                                <rect key="frame" x="245" y="116" width="71" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="71" id="hiZ-Ua-ZN6"/>
+                                    <constraint firstAttribute="height" constant="21" id="n1C-zd-Nco"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="63B-XQ-4Zo" firstAttribute="top" secondItem="kd1-wR-CGV" secondAttribute="bottom" constant="52" id="C0a-L3-0ki"/>
+                            <constraint firstItem="Lkh-NW-MqK" firstAttribute="top" secondItem="kd1-wR-CGV" secondAttribute="bottom" constant="52" id="L29-T2-nj9"/>
+                            <constraint firstItem="avb-yK-Sus" firstAttribute="top" secondItem="kd1-wR-CGV" secondAttribute="bottom" constant="81" id="MAp-3h-8Dh"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Lkh-NW-MqK" secondAttribute="trailing" constant="43" id="W3O-Rl-qeV"/>
+                            <constraint firstItem="mcT-pb-YxW" firstAttribute="top" secondItem="sAt-tL-5dn" secondAttribute="bottom" constant="437" id="cxz-OO-PzE"/>
+                            <constraint firstItem="CQO-Bq-xlZ" firstAttribute="top" secondItem="kd1-wR-CGV" secondAttribute="bottom" constant="81" id="gkh-bZ-uxc"/>
+                            <constraint firstItem="sAt-tL-5dn" firstAttribute="centerX" secondItem="q2P-9E-9Jp" secondAttribute="centerX" id="lSE-aT-zhD"/>
+                            <constraint firstItem="avb-yK-Sus" firstAttribute="leading" secondItem="q2P-9E-9Jp" secondAttribute="leadingMargin" constant="54" id="pqP-iP-v0r"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CQO-Bq-xlZ" secondAttribute="trailing" constant="30" id="rG8-F2-1T6"/>
+                            <constraint firstItem="63B-XQ-4Zo" firstAttribute="leading" secondItem="q2P-9E-9Jp" secondAttribute="leadingMargin" constant="64" id="s7m-zA-L4e"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Select hotel filters" id="Kkd-oh-Evl">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="v7a-jk-OPA">
@@ -192,6 +249,10 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="endRange" destination="CQO-Bq-xlZ" id="b2m-XU-WqI"/>
+                        <outlet property="startRange" destination="avb-yK-Sus" id="76D-ut-fh5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Rab-A5-nXD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

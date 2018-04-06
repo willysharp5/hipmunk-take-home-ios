@@ -10,7 +10,7 @@ import Foundation
 import WebKit
 import UIKit
 
-class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigationDelegate, SortHotelViewControllerDelegate {
+class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigationDelegate, SortHotelViewControllerDelegate, FilterHotelViewControllerDelegate {
 
     struct Search {
         let location: String
@@ -27,6 +27,9 @@ class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigati
     }
     
     var sortOptionData = ""
+    var setFilterData = false
+    var priceMaxData = ""
+    var priceMinData = ""
     var hotelData = hotelInfo()
     private var _searchToRun: Search?
     
@@ -89,6 +92,16 @@ class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigati
                 self.webView.evaluateJavaScript("window.JSAPI.setHotelSort(\(sortOptionData))", completionHandler: nil)
             }
             
+            //filter
+            if setFilterData {
+                priceMaxData = "\u{22}\(priceMaxData)\u{22}" //add quotes
+                priceMinData = "\u{22}\(priceMinData)\u{22}" //add quotes
+                let setHotelFilter = "window.JSAPI.setHotelFilters({priceMin: \(priceMinData), priceMax: \(priceMaxData)})"
+                
+                //print(setHotelFilter)
+                self.webView.evaluateJavaScript(setHotelFilter, completionHandler: nil)
+            }
+            
             
         case "HOTEL_API_RESULTS_READY":
             //Update Title to show count
@@ -113,6 +126,13 @@ class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigati
     func sortOption(sortOption: String) {
         sortOptionData = sortOption
     }
+    
+    // MARK: - Filter
+    func filterOption(priceMax: String, priceMin: String, setFilter: Bool) {
+        setFilterData = setFilter
+        priceMinData = priceMin
+        priceMaxData = priceMax
+    }
 
 }
 
@@ -132,6 +152,12 @@ extension SearchViewController {
             let navVC = segue.destination as? UINavigationController
             let sortPickerVC = navVC?.topViewController as? SortHotelViewController
             sortPickerVC?.delegate = self
+        }
+        
+        if segue.identifier == "select_filters" {
+            let navVC = segue.destination as? UINavigationController
+            let filterVC = navVC?.topViewController as? FilterHotelViewController
+            filterVC?.delegate = self
         }
         
     }
