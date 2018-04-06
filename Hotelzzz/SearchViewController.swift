@@ -52,6 +52,7 @@ class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigati
                 // DECLARE YOUR MESSAGE HANDLERS HERE
                 userContentController.add(self, name: "API_READY")
                 userContentController.add(self, name: "HOTEL_API_HOTEL_SELECTED")
+                userContentController.add(self, name: "HOTEL_API_RESULTS_READY")
 
                 return userContentController
             }()
@@ -81,17 +82,21 @@ class SearchViewController: UIViewController, WKScriptMessageHandler, WKNavigati
         switch message.name {
         case "API_READY":
             guard let searchToRun = _searchToRun else { fatalError("Tried to load the page without having a search to run") }
-            self.webView.evaluateJavaScript(
+           self.webView.evaluateJavaScript(
                 "window.JSAPI.runHotelSearch(\(searchToRun.asJSONString))",
                 completionHandler: nil)
-        case "HOTEL_API_HOTEL_SELECTED":
             
-            //Extract Datas
+        case "HOTEL_API_RESULTS_READY":
+            //Update Title to show count
             let json = message.body as! NSDictionary
-            let dic = json
-            //print(dic)
+            let data:NSArray = json.object(forKey: "results") as! NSArray
             
-            hotelData = Utils.cleanUpData(dic: dic)
+            navigationItem.title = "\(data.count) Records"
+            
+        case "HOTEL_API_HOTEL_SELECTED":
+            //Extract Data
+            let json = message.body as! NSDictionary
+            hotelData = Utils.cleanUpData(dic: json)
             
             self.performSegue(withIdentifier: "hotel_details", sender: nil)
         default: break
