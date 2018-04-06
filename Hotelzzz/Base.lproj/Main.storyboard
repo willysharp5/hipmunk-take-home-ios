@@ -250,6 +250,10 @@
                                     <constraint firstAttribute="width" constant="240" id="p38-zU-7By"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="6hl-O5-KIr">
+                                <rect key="frame" x="181" y="323" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -269,6 +273,7 @@
                     <connections>
                         <outlet property="addressLabel" destination="Mql-n0-GML" id="JYu-80-RhB"/>
                         <outlet property="hotelNameLabel" destination="5xY-Ql-xxp" id="Bfq-mC-hhs"/>
+                        <outlet property="loadSpinner" destination="6hl-O5-KIr" id="Wfw-9u-qg8"/>
                         <outlet property="priceLabel" destination="rgR-4B-IOL" id="hUf-r4-lyS"/>
                         <outlet property="webViewContainer" destination="CL1-2k-xnX" id="J4l-Zf-Lyj"/>
                     </connections>

@@ -11,7 +11,7 @@ import UIKit
 import WebKit
 
 
-class HotelViewController: UIViewController, WKUIDelegate {
+class HotelViewController: UIViewController, WKUIDelegate, WKNavigationDelegate {
     var hotelData = hotelInfo()
     var webView: WKWebView!
     
@@ -19,6 +19,7 @@ class HotelViewController: UIViewController, WKUIDelegate {
     @IBOutlet var addressLabel: UILabel!
     @IBOutlet var priceLabel: UILabel!
     
+    @IBOutlet weak var loadSpinner: UIActivityIndicatorView!
     @IBOutlet weak var webViewContainer: UIView!
     
     override func viewWillAppear(_ animated: Bool) {
@@ -44,10 +45,16 @@ class HotelViewController: UIViewController, WKUIDelegate {
         webView.bottomAnchor.constraint(equalTo: webViewContainer.bottomAnchor).isActive = true
         webView.heightAnchor.constraint(equalTo: webViewContainer.heightAnchor).isActive = true
         webView.uiDelegate = self
+        webView.navigationDelegate = self
         
         let imageString = hotelData.imageURL
         let myURL = URL(string: imageString)
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
     }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        self.loadSpinner.stopAnimating()
+    }
+    
 }
