@@ -44,7 +44,7 @@ struct Utils {
         
         let hotelData = hotelInfo()
         hotelData.address = (address[0].replacingOccurrences(of: "\"", with: "")).replacingOccurrences(of: "\\n", with: " ") //remove double quotes
-        hotelData.imageURL = imageURL[0].replacingOccurrences(of: "\"", with: "") 
+        hotelData.imageURL = imageURL[0].replacingOccurrences(of: "\"", with: "").trimmingCharacters(in: .whitespaces)
         hotelData.name = name[0].replacingOccurrences(of: "\"", with: "")
         hotelData.price = price[0]
         
