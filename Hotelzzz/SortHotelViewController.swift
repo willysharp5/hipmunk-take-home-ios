@@ -19,13 +19,20 @@ class SortHotelViewController: UIViewController, UIPickerViewDelegate, UIPickerV
     @IBOutlet weak var pickerView: UIPickerView!
     
     weak var delegate: SortHotelViewControllerDelegate?
-    var selectedOption = "name"
+    var selectedOption = ""
     let pickerViewData = ["name","priceAscend","priceDescend"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.pickerView.dataSource = self
         self.pickerView.delegate = self
+        
+        if selectedOption == "" {
+            selectedOption = "name"
+        }else {
+            selectedOption = selectedOption.replacingOccurrences(of: "\u{22}", with: "")
+        }
+        self.pickerView.selectRow(pickerViewData.index(of:selectedOption)!, inComponent: 0, animated: false)
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

@@ -20,13 +20,15 @@ class FilterHotelViewController: UIViewController {
     @IBOutlet weak var startRange: UITextField!
     @IBOutlet weak var endRange: UITextField!
     
-    var priceMax = "200"
-    var priceMin = "100"
+    var priceMax = ""
+    var priceMin = ""
     var setFilter = false
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        priceMax = priceMax.replacingOccurrences(of: "\u{22}", with: "")
         startRange.text = priceMax
+        priceMin = priceMin.replacingOccurrences(of: "\u{22}", with: "")
         endRange.text = priceMin
     }
     

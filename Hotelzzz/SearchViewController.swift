@@ -151,12 +151,15 @@ extension SearchViewController {
         if segue.identifier == "select_sort" {
             let navVC = segue.destination as? UINavigationController
             let sortPickerVC = navVC?.topViewController as? SortHotelViewController
+            sortPickerVC?.selectedOption = sortOptionData
             sortPickerVC?.delegate = self
         }
         
         if segue.identifier == "select_filters" {
             let navVC = segue.destination as? UINavigationController
             let filterVC = navVC?.topViewController as? FilterHotelViewController
+            filterVC?.priceMin = priceMinData
+            filterVC?.priceMax = priceMaxData
             filterVC?.delegate = self
         }
         
