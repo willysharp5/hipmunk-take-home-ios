@@ -1,4 +1,4 @@
-# An attampt to solve this problem. This might notbethe ultimate way to solev this.  
+# An attempt to solve this problem. This might not be the ultimate way to solve this.  
 
 
 # hipmunk-take-home-ios
